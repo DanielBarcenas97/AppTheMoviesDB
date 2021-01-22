@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +17,9 @@ import android.view.ViewGroup;
 
 import com.example.themoviesdb.R;
 import com.example.themoviesdb.data.local.entity.MovieEntity;
+import com.example.themoviesdb.data.network.Resource;
+import com.example.themoviesdb.viewmodel.MovieViewModel;
+
 import java.util.List;
 
 /**
@@ -22,9 +28,11 @@ import java.util.List;
 public class MovieFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 1;
+    private int mColumnCount = 2;
     List<MovieEntity> movieList;
     MyMovieRecyclerViewAdapter adapter;
+
+    MovieViewModel movieViewModel;
 
     public MovieFragment() {
     }
@@ -44,6 +52,9 @@ public class MovieFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        movieViewModel = ViewModelProviders.of(getActivity())
+                .get(MovieViewModel.class);
     }
 
     @Override
@@ -64,7 +75,20 @@ public class MovieFragment extends Fragment {
                     getActivity(),movieList
             );
             recyclerView.setAdapter(adapter);
+
+            loadMovies();
         }
         return view;
+    }
+
+    private void loadMovies() {
+        movieViewModel.getPopularMovies().observe(getActivity(), new Observer<Resource<List<MovieEntity>>>() {
+            @Override
+            public void onChanged(Resource<List<MovieEntity>> listResource) {
+                movieList = listResource.data;
+                adapter.setData(movieList);
+
+            }
+        });
     }
 }

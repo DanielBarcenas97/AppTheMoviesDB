@@ -3,9 +3,10 @@ package com.example.themoviesdb.data.network;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static com.androidavanzado.offlinemovies.data.network.Status.ERROR;
-import static com.androidavanzado.offlinemovies.data.network.Status.LOADING;
-import static com.androidavanzado.offlinemovies.data.network.Status.SUCCESS;
+
+import static com.example.themoviesdb.data.network.Status.ERROR;
+import static com.example.themoviesdb.data.network.Status.LOADING;
+import static com.example.themoviesdb.data.network.Status.SUCCESS;
 
 
 /**
