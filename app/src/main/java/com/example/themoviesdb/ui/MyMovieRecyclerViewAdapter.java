@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.themoviesdb.R;
@@ -38,6 +39,8 @@ public class MyMovieRecyclerViewAdapter extends RecyclerView.Adapter<MyMovieRecy
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         Glide.with(ctx).load(IMAGE_API_PREFIX + holder.mItem.getPosterPath()).into(holder.imageViewCover);
+        holder.textTitle.setText(holder.mItem.getTitle());
+
     }
 
 
@@ -58,12 +61,14 @@ public class MyMovieRecyclerViewAdapter extends RecyclerView.Adapter<MyMovieRecy
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final ImageView imageViewCover;
+        public final TextView textTitle;
         public MovieEntity mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             imageViewCover = view.findViewById(R.id.image_view_cover);
+            textTitle = view.findViewById(R.id.text_title);
 
         }
 
