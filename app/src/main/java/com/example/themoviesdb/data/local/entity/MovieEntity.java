@@ -1,5 +1,5 @@
 
-package com.example.themoviesdb.data;
+package com.example.themoviesdb.data.local.entity;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
