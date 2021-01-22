@@ -74,7 +74,7 @@ public class MovieRepository {
             @Override
             protected Call<MoviesResponse> createCall() {
                 //Obtenemos los datos de la API remota
-               return movieApiService.loadPopularMovies();
+               return movieApiService.loadPopularMovies(1);
             }
         }.getAsLiveData();
     }

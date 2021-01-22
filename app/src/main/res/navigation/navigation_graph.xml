@@ -16,4 +16,8 @@
         android:name="com.example.themoviesdb.ui.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/action_upload"
+        android:name="com.example.themoviesdb.ui.UploadPhotoFragment"
+        android:label="UploadPhotoFragment" />
 </navigation>
