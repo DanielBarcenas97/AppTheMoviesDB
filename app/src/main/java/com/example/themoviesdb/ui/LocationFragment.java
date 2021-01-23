@@ -11,25 +11,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.themoviesdb.R;
+import com.example.themoviesdb.databinding.FragmentLocationBinding;
+import com.example.themoviesdb.databinding.FragmentUploadPhotoBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class LocationFragment extends Fragment {
 
-
-    public LocationFragment() {
-        // Required empty public constructor
-    }
+    private FragmentLocationBinding Binding;
+    public LocationFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_location, container, false);
+        Binding = FragmentLocationBinding.inflate(inflater,container,false);
+        View view = Binding.getRoot();
+        init();
+        return view;
     }
 
+    private void init(){
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
 
     }
+
 }
