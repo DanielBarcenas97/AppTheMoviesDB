@@ -18,4 +18,5 @@
     <string name="ver_ultimas_ubicaciones">Ver ultimas ubicaciones</string>
     <string name="hour">hora</string>
     <string name="coordenadas">Coordenadas</string>
+    <string name="imagenes">Imagenes en Storage</string>
 </resources>

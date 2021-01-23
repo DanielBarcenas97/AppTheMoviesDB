@@ -29,8 +29,13 @@ import android.widget.Toast;
 import com.example.themoviesdb.R;
 import com.example.themoviesdb.databinding.FragmentUploadPhotoBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,6 +43,9 @@ import com.google.firebase.storage.UploadTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -49,6 +57,9 @@ public class UploadPhotoFragment extends Fragment {
         private static final int IMAGE_REQUEST = 2;
         private static final int RP_CAMERA = 100;
         private static final int REQUEST_CODE_CAMERA_PERMISSION = 2012;
+        FirebaseFirestore db;
+
+        ArrayList<String> URLS = new ArrayList<String>();
 
         FirebaseStorage storage;
         public UploadPhotoFragment() {
@@ -65,6 +76,7 @@ public class UploadPhotoFragment extends Fragment {
         }
 
         private void init(){
+                db = FirebaseFirestore.getInstance();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA_PERMISSION);
                 }
@@ -73,7 +85,6 @@ public class UploadPhotoFragment extends Fragment {
                 }
 
                 storage = FirebaseStorage.getInstance();
-                Binding.btnUpload.setVisibility(View.GONE);
                 Binding.uploadGallery.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -84,6 +95,13 @@ public class UploadPhotoFragment extends Fragment {
                         @Override
                         public void onClick(View view) {
                                 takePhoto();
+                        }
+                });
+
+                Binding.btnImgStorage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                getURLFirestore();
                         }
                 });
 
@@ -120,8 +138,11 @@ public class UploadPhotoFragment extends Fragment {
                                                 public void onSuccess(Uri uri) {
                                                         String url = uri.toString();
                                                         Log.d("Download", url);
+                                                        addDataFirestore(url);
                                                         pd.dismiss();
                                                         Toast.makeText(getContext(),"UploadSuccess", Toast.LENGTH_LONG).show();
+
+
                                                 }
                                         });
                                 }
@@ -164,6 +185,45 @@ public class UploadPhotoFragment extends Fragment {
                 inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                 String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
                 return Uri.parse(path);
+        }
+
+        private void addDataFirestore(String url) {
+                // Create a new user with a first and last name
+                Map<String, Object> user = new HashMap<>();
+                user.put("URL", url);
+                db.collection("images")
+                        .add(user)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                @Override
+                                public void onSuccess(DocumentReference documentReference) {
+                                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                                }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                        //Log.w(TAG, "Error adding document", e);
+                                }
+                        });
+
+        }
+
+        private void getURLFirestore(){
+                db.collection("images")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                        String img = document.getString("URL");
+                                                        URLS.add(img);
+                                                }
+                                        } else {
+                                                //Log.w(TAG, "Error getting documents.", task.getException());
+                                        }
+                                }
+                        });
         }
 }
 

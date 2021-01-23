@@ -65,9 +65,9 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_upload"
+            android:id="@+id/btn_img_storage"
             android:textColor="@color/white"
-            android:text="@string/btn_upload"
+            android:text="@string/imagenes"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_width="match_parent"
