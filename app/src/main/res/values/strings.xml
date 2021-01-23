@@ -2,4 +2,10 @@
     <string name="app_name">TheMoviesDB</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="upload_gallery">Galeria</string>
+    <string name="upload_cam">Camara</string>
+    <string name="txt_upload_photo">Subir Foto a Firestore</string>
+    <string name="tv_txt_upload">Elige de donde quieres subirla</string>
+    <string name="btn_upload">Subir Imagen</string>
+    <string name="tv_location">Ubicacion Actual</string>
 </resources>

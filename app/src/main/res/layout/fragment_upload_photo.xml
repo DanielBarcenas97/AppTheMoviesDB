@@ -6,13 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".ui.UploadPhotoFragment">
 
-    <TextView
-        android:gravity="center_horizontal"
-        android:background="@color/purple_200"
-        android:textSize="30sp"
-        android:textColor="#FFFFFF"
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hola" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_upload_photo" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            android:layout_height="150dp">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tv_upload_text"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_txt_upload" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/uploadGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upload_gallery" />
+
+
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/uploadCamara"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upload_cam" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:textColor="@color/white"
+            android:text="@string/btn_upload"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+
+
 
 </FrameLayout>
