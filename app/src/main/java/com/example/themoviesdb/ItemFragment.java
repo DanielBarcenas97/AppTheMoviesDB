@@ -27,13 +27,7 @@ public class ItemFragment extends Fragment {
     ArrayList<String> URLS;
     MyItemRecyclerViewAdapter adapter;
 
-    public static ItemFragment newInstance(int columnCount) {
-        ItemFragment fragment = new ItemFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
