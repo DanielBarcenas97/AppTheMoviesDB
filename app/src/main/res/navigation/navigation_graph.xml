@@ -23,11 +23,20 @@
     <fragment
         android:id="@+id/action_upload"
         android:name="com.example.themoviesdb.ui.UploadPhotoFragment"
-        android:label="UploadPhotoFragment" />
+        android:label="UploadPhotoFragment" >
+        <action
+            android:id="@+id/action_action_upload_to_itemFragment"
+            app:destination="@id/itemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.example.themoviesdb.ui.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/itemFragment"
+        android:name="com.example.themoviesdb.ItemFragment"
+        android:label="fragment_item_list2"
+        tools:layout="@layout/fragment_item_list2" />
 
 </navigation>

@@ -1,57 +1,47 @@
-package com.example.themoviesdb.ui;
+package com.example.themoviesdb;
 
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-import com.example.themoviesdb.R;
-import com.example.themoviesdb.data.local.entity.MovieEntity;
-
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.themoviesdb.data.remote.ApiConstants.IMAGE_API_PREFIX;
 
 
-public class MyMovieRecyclerViewAdapter extends RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder> {
+public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private  List<MovieEntity> mValues;
+    private final ArrayList<String> mValues;
     Context ctx;
 
-    public MyMovieRecyclerViewAdapter(Context context, List<MovieEntity> items) {
+    public MyItemRecyclerViewAdapter(FragmentActivity activity, ArrayList<String> items) {
         mValues = items;
-        ctx = context;
+        ctx = activity;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.fragment_item2, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        Glide.with(ctx).load(IMAGE_API_PREFIX + holder.mItem.getPosterPath()).into(holder.imageViewCover);
-        holder.textTitle.setText(holder.mItem.getTitle());
 
+        Glide.with(ctx).load(mValues.get(position)).into(holder.imageViewCover);
     }
 
 
-    public void setData(List<MovieEntity> movies){
-        this.mValues = movies;
-        notifyDataSetChanged();
-    }
 
     @Override
     public int getItemCount() {
-
         if(mValues != null)
             return mValues.size();
         else return 0;
@@ -61,15 +51,12 @@ public class MyMovieRecyclerViewAdapter extends RecyclerView.Adapter<MyMovieRecy
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final ImageView imageViewCover;
-        public final TextView textTitle;
-        public MovieEntity mItem;
+
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             imageViewCover = view.findViewById(R.id.image_view_cover);
-            textTitle = view.findViewById(R.id.text_title);
-
         }
 
     }

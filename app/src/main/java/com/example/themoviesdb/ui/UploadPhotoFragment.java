@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -101,7 +102,7 @@ public class UploadPhotoFragment extends Fragment {
                 Binding.btnImgStorage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                                getURLFirestore();
+                                getURLFirestore(view);
                         }
                 });
 
@@ -208,7 +209,7 @@ public class UploadPhotoFragment extends Fragment {
 
         }
 
-        private void getURLFirestore(){
+        private void getURLFirestore(View view){
                 db.collection("images")
                         .get()
                         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -219,6 +220,11 @@ public class UploadPhotoFragment extends Fragment {
                                                         String img = document.getString("URL");
                                                         URLS.add(img);
                                                 }
+
+                                                Bundle bundle = new Bundle();
+                                                bundle.putStringArrayList("URLS", URLS);
+
+                                                Navigation.findNavController(view).navigate(R.id.action_action_upload_to_itemFragment,bundle);
                                         } else {
                                                 //Log.w(TAG, "Error getting documents.", task.getException());
                                         }

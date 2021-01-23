@@ -1,11 +1,9 @@
-package com.example.themoviesdb.ui;
+package com.example.themoviesdb;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,30 +12,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.themoviesdb.R;
 import com.example.themoviesdb.data.local.entity.MovieEntity;
-import com.example.themoviesdb.data.network.Resource;
-import com.example.themoviesdb.viewmodel.MovieViewModel;
+import com.example.themoviesdb.ui.MyMovieRecyclerViewAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- */
-public class MovieFragment extends Fragment {
+
+public class ItemFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
-    private int mColumnCount = 3;
-    List<MovieEntity> movieList;
-    MyMovieRecyclerViewAdapter adapter;
+    private int mColumnCount = 2;
 
-    MovieViewModel movieViewModel;
+    ArrayList<String> URLS;
+    MyItemRecyclerViewAdapter adapter;
 
-    public MovieFragment() {
-    }
-
-    public static MovieFragment newInstance(int columnCount) {
-        MovieFragment fragment = new MovieFragment();
+    public static ItemFragment newInstance(int columnCount) {
+        ItemFragment fragment = new ItemFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -51,15 +42,13 @@ public class MovieFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-
-        movieViewModel = ViewModelProviders.of(getActivity())
-                .get(MovieViewModel.class);
+        URLS = getArguments().getStringArrayList("URLS");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_list2, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -70,24 +59,12 @@ public class MovieFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            adapter = new MyMovieRecyclerViewAdapter(
-                    getActivity(),movieList
-            );
+
+
+            adapter = new MyItemRecyclerViewAdapter(getActivity(),URLS);
             recyclerView.setAdapter(adapter);
 
-            loadMovies();
         }
         return view;
-    }
-
-    private void loadMovies() {
-        movieViewModel.getPopularMovies().observe(requireActivity(), new Observer<Resource<List<MovieEntity>>>() {
-            @Override
-            public void onChanged(Resource<List<MovieEntity>> listResource) {
-                movieList = listResource.data;
-                adapter.setData(movieList);
-
-            }
-        });
     }
 }
