@@ -21,6 +21,17 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_location" />
 
+        <TextView
+            android:id="@+id/tv_location"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coordenadas" />
+
 
 
     </LinearLayout>
