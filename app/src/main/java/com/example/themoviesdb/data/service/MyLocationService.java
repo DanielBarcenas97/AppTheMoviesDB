@@ -30,7 +30,7 @@ public class MyLocationService extends BroadcastReceiver {
                             .toString();
 
                     try {
-                        LocationFragment.getInstance().updateTextView(location_string);
+                        //LocationFragment.getInstance().updateTextView(location_string);
                     }catch (Exception ex){
                         Toast.makeText(context,location_string, Toast.LENGTH_LONG).show();
                     }
