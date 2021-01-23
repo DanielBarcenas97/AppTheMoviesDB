@@ -71,7 +71,7 @@ public class LocationFragment extends Fragment {
     private static final String TAG = LocationFragment.class.getSimpleName();
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
-    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 20000;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1800000; //30 min
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
     private FusedLocationProviderClient mFusedLocationClient;
     private SettingsClient mSettingsClient;
@@ -194,9 +194,9 @@ public class LocationFragment extends Fragment {
 
     private void updateLocationUI() {
         if (mCurrentLocation != null) {
-            Binding.tvLocation.setText(String.format(Locale.ENGLISH, "%f / %f ", mCurrentLocation.getLongitude(),
-                    mCurrentLocation.getLatitude()));
-            Binding.tvHour.setText(String.format(Locale.ENGLISH, "%s",mLastUpdateTime));
+            Binding.tvLocation.setText(String.format(Locale.ENGLISH, "%f / %f ",
+                    mCurrentLocation.getLatitude(),mCurrentLocation.getLongitude()));
+            Binding.tvHour.setText(String.format(Locale.ENGLISH, " Ultima actualización %s",mLastUpdateTime));
             addDataFirestore(mCurrentLocation.getLongitude(),mCurrentLocation.getLatitude(),mLastUpdateTime);
         }
     }
