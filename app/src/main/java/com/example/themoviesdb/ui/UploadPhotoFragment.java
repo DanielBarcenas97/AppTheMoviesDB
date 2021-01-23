@@ -89,13 +89,13 @@ public class UploadPhotoFragment extends Fragment {
 
         private void takePhoto(){
                 //Request for Camera runtime permission
-                //if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-                //        != PackageManager.PERMISSION_GRANTED){
+                if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED){
 //
-                //        ActivityCompat.requestPermissions((Activity) requireContext(), new String[]{
-                //                Manifest.permission.CAMERA
-                //        },100);
-                //}
+                        ActivityCompat.requestPermissions((Activity) requireContext(), new String[]{
+                                Manifest.permission.CAMERA
+                        },100);
+                }
 
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,RP_CAMERA);

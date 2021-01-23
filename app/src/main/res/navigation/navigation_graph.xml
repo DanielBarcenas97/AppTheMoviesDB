@@ -15,9 +15,19 @@
         android:id="@+id/action_favorites"
         android:name="com.example.themoviesdb.ui.LocationFragment"
         android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/action_action_favorites_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/action_upload"
         android:name="com.example.themoviesdb.ui.UploadPhotoFragment"
         android:label="UploadPhotoFragment" />
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.example.themoviesdb.ui.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
 </navigation>

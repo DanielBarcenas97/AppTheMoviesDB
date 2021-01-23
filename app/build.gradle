@@ -38,6 +38,7 @@ android {
 dependencies {
 
 
+
     def room_version = "2.2.6"
     def lifecycle_version = "2.2.0"
 
@@ -86,8 +87,10 @@ dependencies {
 
     //Location
     implementation 'com.google.android.gms:play-services-location:17.1.0'
-    implementation 'com.karumi:dexter:6.2.2'
-    implementation 'com.google.android.gms:play-services-basement:17.4.0'
+    implementation 'com.google.android.gms:play-services-basement:17.5.0'
+
+    //Maps
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
 }
 
