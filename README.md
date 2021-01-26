@@ -8,6 +8,8 @@ MVVM pattern with Repository Pattern and inspired by the Clean.
 - Repository Pattern.
 - Responsive UI.
 - Retrofit.
+- Firestore.
+- Cloud Storage.
 - Databinding.
 - Navigation Component.
 - Material Design pattern in available time.
@@ -23,6 +25,8 @@ MVVM pattern with Repository Pattern and inspired by the Clean.
 4.  **Databinding:** For view binding.
 5.  **Glide:** For image loading.
 7.  **Paging library:** For Paging in RecyclerView.
+8.  **Google Services ** 
+9.  **Firebase** Firestore and Storage
 
 
 <img src="https://github.com/DanielBarcenas97/AppTheMoviesDB/blob/master/db1.jpeg" width="300">
